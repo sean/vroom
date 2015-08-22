@@ -1,28 +1,9 @@
-== README
+# Lighthouse
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a clone of https://getlighthouse.com
 
-Things you may want to cover:
+[Jason Evanish](http://jasonevanish.com) has done an excellent job building a superb product. I suggest you visit the [Lighthouse website](https://getlighthouse.com) and sign up for a free trial. His service is significantly more polished than this weekend project.
 
-* Ruby version
+## Background
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+I threw this together in a weekend as I wanted to build the core of different products. Note that I said core. As an example, Jason's excellent service will email you reminders and even allow you to email the folks you're having 1:1s with. The initial weekend 'MVP' omitted email. I may revisit this or this may be it, so feel free to fork it and expand upon it.
