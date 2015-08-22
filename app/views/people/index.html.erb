@@ -1,1 +1,10 @@
+<h1>People</h1>
+
 <%= link_to "New Person", new_person_path %>
+
+<div id="people">
+  <% @people.each do |person| %>
+    <h2><%= link_to person.name, person %></h2>
+    <p><%= person.title %></p>
+  <% end %>
+</div>
