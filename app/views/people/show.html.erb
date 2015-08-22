@@ -1,3 +1,5 @@
 <% title(@person.name, "People") %>
 <h1><%= @person.name %></h1>
 <h3><%= @person.title %></h3>
+
+<%= link_to "Edit Person", edit_person_path(@person) %>
