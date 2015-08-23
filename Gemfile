@@ -32,6 +32,8 @@ gem 'simple_form', '~> 3.1.0'
 
 # Use Devise for authentication
 gem 'devise', '~> 3.5'
+# Use Pundit for authorization
+gem 'pundit', '~> 1.0'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

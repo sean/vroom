@@ -18,6 +18,7 @@ class NotesController < ApplicationController
   end
 
   def show
+    authorize @person, :show?
   end
 
   def edit

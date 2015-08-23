@@ -2,9 +2,10 @@ require "rails_helper"
 
 RSpec.feature "Users can create new notes" do
   let(:owner)  { FactoryGirl.create(:user) }
+  let(:person) { FactoryGirl.create(:person, name: "John Smith", owner: owner) }
 
   before do
-    person = FactoryGirl.create(:person, name: "John Smith", owner: owner)
+    login_as(owner)
     visit person_path(person)
     click_link "New Note"
   end

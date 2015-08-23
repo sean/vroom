@@ -22,6 +22,7 @@ class PeopleController < ApplicationController
   end
 
   def show
+    authorize @person, :show?
   end
 
   def edit

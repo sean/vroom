@@ -3,6 +3,10 @@ require "rails_helper"
 RSpec.feature "Users can view people" do
   let(:owner)  { FactoryGirl.create(:user) }
 
+  before do
+    login_as(owner)
+  end
+
   scenario "with the person's details" do
     person = FactoryGirl.create(:person, 
                                 name: "John Smith",
