@@ -20,7 +20,7 @@ Rails.application.routes.draw do
   namespace :admin do
     root "application#index"
 
-    resources :people, only: [:index, :show, :edit, :update, :destroy]
+    resources :users
   end
 
   devise_for :users
