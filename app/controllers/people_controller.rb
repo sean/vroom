@@ -1,4 +1,5 @@
 class PeopleController < ApplicationController
+  before_action :set_person, only: [:show, :edit, :update, :destroy]
 
   def index
     @people = Person.all
@@ -20,15 +21,12 @@ class PeopleController < ApplicationController
   end
 
   def show
-    @person = Person.find(params[:id])
   end
 
   def edit
-    @person = Person.find(params[:id])
   end
 
   def update
-    @person = Person.find(params[:id])
     if @person.update(person_params)
       flash[:notice] = "Person has been updated."
       redirect_to @person
@@ -39,14 +37,20 @@ class PeopleController < ApplicationController
   end
 
   def destroy
-    @person = Person.find(params[:id])
     @person.destroy
     flash[:notice] = "Person has been deleted."
     redirect_to people_path
   end  
 
   private
-   
+  
+  def set_person
+    @person = Person.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    flash[:alert] = "The person you were looking for could not be found."
+    redirect_to people_path
+  end
+
   def person_params
     params.require(:person).permit(:name, :title)
   end
