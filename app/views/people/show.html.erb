@@ -19,3 +19,11 @@
               class: "new" %></li>
     </ul>
 </header>
+
+<ul id="notes">
+  <% @person.notes.each do |n| %>
+  <li>#<%= n.id %> -
+    <%= link_to n.details, [@person, n] %>
+  </li>
+  <% end %>
+</ul>
