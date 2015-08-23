@@ -1,7 +1,10 @@
 require "rails_helper"
 
 RSpec.feature "Users can create new people" do
+  let(:user) { FactoryGirl.create(:user) }
+  
   before do
+    login_as(user)
     visit "/people"
     click_link "New Person"
   end

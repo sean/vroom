@@ -11,6 +11,7 @@ class PeopleController < ApplicationController
 
   def create
     @person = Person.new(person_params)
+    @person.owner = current_user
     if @person.save
       flash[:notice] = "Person has been created."
       redirect_to @person

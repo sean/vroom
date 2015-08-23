@@ -1,10 +1,12 @@
 require "rails_helper"
 
 RSpec.feature "Users can delete notes" do
-  let(:person) { FactoryGirl.create(:person) }
+  let(:owner)  { FactoryGirl.create(:user) }
+  let(:person) { FactoryGirl.create(:person, owner: owner) }
   let(:note)  { FactoryGirl.create(:note, person: person) }
 
   before do
+    login_as(owner)
     visit person_note_path(person, note)
   end
 

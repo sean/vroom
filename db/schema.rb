@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150823180308) do
+ActiveRecord::Schema.define(version: 20150823201058) do
 
   create_table "notes", force: :cascade do |t|
     t.text     "details"
@@ -27,7 +27,10 @@ ActiveRecord::Schema.define(version: 20150823180308) do
     t.string   "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "owner_id"
   end
+
+  add_index "people", ["owner_id"], name: "index_people_on_owner_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

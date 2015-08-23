@@ -1,8 +1,10 @@
 require "rails_helper"
 
 RSpec.feature "Users can edit existing projects" do
+  let(:owner) { FactoryGirl.create(:user) }
+
   before do
-    FactoryGirl.create(:person, name: "John Smith")
+    FactoryGirl.create(:person, name: "John Smith", owner: owner)
     visit "/people"
     click_link "John Smith"
     click_link "Edit Person"

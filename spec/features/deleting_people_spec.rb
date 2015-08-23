@@ -1,8 +1,10 @@
 require "rails_helper"
         
 RSpec.feature "Users can delete people" do
+  let(:owner)  { FactoryGirl.create(:user) }
+
   scenario "successfully" do
-    FactoryGirl.create(:person, name: "John Smith")
+    FactoryGirl.create(:person, name: "John Smith", owner: owner)
     visit "/people"
     click_link "John Smith"
     click_link "Delete Person"
