@@ -4,6 +4,10 @@
   </header>
   <header>
     <h2><%= @note.details %></h2>
+    <ul class="actions">
+      <li><%= link_to "Edit Note", [:edit, @person, @note],
+              class: "edit" %></li>
+    </ul>
   </header>
   <%= @note.created_at %>
 </div>

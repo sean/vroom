@@ -20,6 +20,19 @@ class NotesController < ApplicationController
   def show
   end
 
+  def edit
+  end
+
+  def update
+    if @note.update(note_params)
+      flash[:notice] = "Note has been updated."
+      redirect_to [@person, @note]
+    else
+      flash.now[:alert] = "Note has not been updated."
+      render "edit"
+    end
+  end  
+
   private
 
   def note_params
