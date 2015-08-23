@@ -33,6 +33,12 @@ class NotesController < ApplicationController
     end
   end  
 
+  def destroy
+    @note.destroy
+    flash[:notice] = "Note has been deleted."
+    redirect_to @person
+  end  
+
   private
 
   def note_params

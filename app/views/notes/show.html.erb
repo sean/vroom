@@ -7,6 +7,9 @@
     <ul class="actions">
       <li><%= link_to "Edit Note", [:edit, @person, @note],
               class: "edit" %></li>
+      <li><%= link_to "Delete Note", [@person, @note], method: :delete,
+              data: { confirm: "Are you sure you want to delete this note?"},
+              class: "delete" %></li>
     </ul>
   </header>
   <%= @note.created_at %>
