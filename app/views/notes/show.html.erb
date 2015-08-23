@@ -1,0 +1,9 @@
+<div id="note">
+  <header>
+    <h1><%= @person.name %></h1>
+  </header>
+  <header>
+    <h2><%= @note.created_at %></h2>
+  </header>
+  <%= simple_format(@note.details) %>
+</div>
