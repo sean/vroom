@@ -1,10 +1,13 @@
 <% title(@person.name, "People") %>
-<h1><%= @person.name %></h1>
-<h3><%= @person.title %></h3>
-
-<%= link_to "Edit Person", edit_person_path(@person) %> | 
-<%= link_to "Delete Person",
+<header>
+  <h1><%= @person.name %></h1>
+  <h3><%= @person.title %></h3>  
+  <ul class="actions">
+    <li><%= link_to "Edit Person", edit_person_path(@person), class: "edit" %></li>
+    <li><%= link_to "Delete Person",
             person_path(@person),
             method: :delete,
-            data: { confirm: "Are you sure you want to delete this person?" }
-%>
+            data: { confirm: "Are you sure you want to delete this person?" },
+            class: "delete" %></li>
+  </ul> 
+</header>

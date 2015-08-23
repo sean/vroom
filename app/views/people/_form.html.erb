@@ -1,19 +1,5 @@
-<h1>New Person</h1>
-<%= form_for(@person) do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
-  <%= f.label :title %>
-  <%= f.text_field :title %>
-  <%= f.submit %>
-<% end %>
-
-<% if @person.errors.any? %>
-  <div id="error_explanation">
-    <h2><%= pluralize(@person.errors.count, "error") %> prohibited this person from being saved:</h2>
-    <ul>
-      <% @person.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
-      <% end %>
-    </ul> 
-  </div>
+<%= simple_form_for(@person) do |f| %>
+  <%= f.input :name %>
+  <%= f.input :title %>
+  <%= f.button :submit, class: "btn-primary" %>
 <% end %>
