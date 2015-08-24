@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'support/pundit_matcher'
 
 describe PersonPolicy do
 
@@ -19,45 +20,36 @@ describe PersonPolicy do
     end 
   end
 
-  permissions :show? do
-    let(:user) { FactoryGirl.create :user }
-    let(:person) { FactoryGirl.create :person, owner: user }
-
-    it "blocks anonymous users" do
-      expect(subject).not_to permit(nil, person)
+  context "permissions" do
+    subject { PersonPolicy.new(user, person) }
+  
+    let(:user) { FactoryGirl.create(:user) }
+    let(:owner) { FactoryGirl.create(:user) }
+    let(:person) { FactoryGirl.create(:person, owner: owner) }
+  
+    context "for anonymous users" do
+      let(:user) { nil }
+      it { should_not permit_action :show }
+      it { should_not permit_action :update }
     end
 
-    it "allows the owner to access" do
-      expect(subject).to permit(user, person)
+    context "for owners of the person" do
+      let(:user) { owner }
+      it { should permit_action :show }
+      it { should permit_action :update }
     end
-
-    it "doesn't allow others to access" do
-      other_user = FactoryGirl.create :user
-      expect(subject).not_to permit(other_user, person)
+  
+    context "for other users" do
+      let(:user) { FactoryGirl.create(:user) }
+      it { should_not permit_action :show }
+      it { should_not permit_action :update }
     end
-  end
-
-  permissions :update? do
-    let(:user) { FactoryGirl.create :user }
-    let(:person) { FactoryGirl.create :person, owner: user }
-
-    it "blocks anonymous users" do
-      expect(subject).not_to permit(nil, person)
+  
+    context "for administrators" do
+      let(:user) { FactoryGirl.create :user, :admin }
+      it { should permit_action :show }
+      it { should permit_action :update }
     end
-
-    it "allows managers of the project" do
-      expect(subject).to permit(user, person)
-    end
-
-    it "allows administrators" do
-      admin = FactoryGirl.create :user, :admin
-      expect(subject).to permit(admin, person)
-    end
-
-    it "doesn't allow other users access" do
-      other_user = FactoryGirl.create :user
-      expect(subject).not_to permit(other_user, person)
-    end 
-  end
+  end            
 
 end

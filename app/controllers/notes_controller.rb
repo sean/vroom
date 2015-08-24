@@ -18,13 +18,15 @@ class NotesController < ApplicationController
   end
 
   def show
-    authorize @person, :show?
+    authorize @note, :show?
   end
 
   def edit
+    authorize @note, :show?
   end
 
   def update
+    authorize @note, :show?
     if @note.update(note_params)
       flash[:notice] = "Note has been updated."
       redirect_to [@person, @note]

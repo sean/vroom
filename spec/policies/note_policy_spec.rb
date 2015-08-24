@@ -1,28 +1,32 @@
 require 'rails_helper'
+require 'support/pundit_matcher'
 
-describe NotePolicy do
+RSpec.describe NotePolicy do
+  context "permissions" do
+    subject { NotePolicy.new(user, note) }
 
-  let(:user) { User.new }
+    let(:user) { FactoryGirl.create(:user) }
+    let(:owner) { FactoryGirl.create(:user) }
+    let(:person) { FactoryGirl.create(:person, owner: owner) }
+    let(:note) { FactoryGirl.create(:note, person: person) }
 
-  subject { described_class }
-
-  permissions :show? do
-    let(:user) { FactoryGirl.create :user }
-    let(:person) { FactoryGirl.create :person, owner: user }
-    let(:note) { FactoryGirl.create :note, person: person }
-
-    it "blocks anonymous users" do
-      expect(subject).not_to permit(nil, note)
+    context "for anonymous users" do
+      let(:user) { nil }
+      it { should_not permit_action :show }
     end
 
-    it "allows the owner to access" do
-      expect(subject).to permit(user, note)
+    context "for owners of the person" do
+      let(:user) { owner }
+      it { should permit_action :show }
     end
 
-    it "doesn't allow others to access" do
-      other_user = FactoryGirl.create :user
-      expect(subject).not_to permit(other_user, note)
+    context "for other users" do
+      it { should_not permit_action :show }
     end
-  end
 
+    context "for administrators" do
+      let(:user) { FactoryGirl.create :user, :admin }
+      it { should permit_action :show }
+    end
+  end 
 end
