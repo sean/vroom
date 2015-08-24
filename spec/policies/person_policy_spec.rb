@@ -4,6 +4,21 @@ describe PersonPolicy do
 
   subject { described_class }
 
+  context "policy_scope" do
+    subject { Pundit.policy_scope(user, Person) }
+    let(:user) { FactoryGirl.create :user }
+    let!(:person) { FactoryGirl.create :person, owner: user }
+  
+    it "is empty for anonymous users" do
+      expect(Pundit.policy_scope(nil, Person)).to be_empty
+    end
+  
+    it "returns all projects for admins" do
+      user.admin = true
+      expect(subject).to include(person)
+    end 
+  end
+
   permissions :show? do
     let(:user) { FactoryGirl.create :user }
     let(:person) { FactoryGirl.create :person, owner: user }
