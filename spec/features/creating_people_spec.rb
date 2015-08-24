@@ -5,7 +5,7 @@ RSpec.feature "Users can create new people" do
   
   before do
     login_as(user)
-    visit "/people"
+    visit people_path
     click_link "New Person"
   end
 

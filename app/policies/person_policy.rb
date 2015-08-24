@@ -18,4 +18,9 @@ class PersonPolicy < ApplicationPolicy
   def create?
     user.try(:admin?) || record.owner == user
   end
+
+  def destroy?
+    user.try(:admin?) || record.owner == user
+  end
+
 end

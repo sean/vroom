@@ -24,11 +24,11 @@ class NotesController < ApplicationController
   end
 
   def edit
-    authorize @note, :show?
+    authorize @note, :update?
   end
 
   def update
-    authorize @note, :show?
+    authorize @note, :update?
     if @note.update(note_params)
       flash[:notice] = "Note has been updated."
       redirect_to [@person, @note]
@@ -39,6 +39,7 @@ class NotesController < ApplicationController
   end  
 
   def destroy
+    authorize @note, :destroy?
     @note.destroy
     flash[:notice] = "Note has been deleted."
     redirect_to @person

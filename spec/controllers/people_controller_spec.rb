@@ -14,7 +14,7 @@ RSpec.describe PeopleController, type: :controller do
     allow(controller).to receive(:current_user) { FactoryGirl.create(:user) }
     person = FactoryGirl.create(:person, owner: owner)
     get :show, id: person
-    expect(response).to redirect_to(root_path)
+    expect(response).to redirect_to(people_path)
     message = "You aren't allowed to do that."
     expect(flash[:alert]).to eq message
   end

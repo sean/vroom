@@ -32,6 +32,7 @@ describe PersonPolicy do
       it { should_not permit_action :create }
       it { should_not permit_action :show }
       it { should_not permit_action :update }
+      it { should_not permit_action :destroy }
     end
 
     context "for owners of the person" do
@@ -39,6 +40,7 @@ describe PersonPolicy do
       it { should permit_action :create }
       it { should permit_action :show }
       it { should permit_action :update }
+      it { should permit_action :destroy }
     end
   
     context "for other users" do
@@ -46,6 +48,7 @@ describe PersonPolicy do
       it { should_not permit_action :create }
       it { should_not permit_action :show }
       it { should_not permit_action :update }
+      it { should_not permit_action :destroy }
     end
   
     context "for administrators" do
@@ -53,6 +56,7 @@ describe PersonPolicy do
       it { should permit_action :create }
       it { should permit_action :show }
       it { should permit_action :update }
+      it { should permit_action :destroy }
     end
   end            
 

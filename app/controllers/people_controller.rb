@@ -6,13 +6,15 @@ class PeopleController < ApplicationController
   end
 
   def new
-    @person = Person.new
-    @person.owner = current_user
+    @person = Person.new(owner: current_user)
+    authorize @person, :create?
   end
 
   def create
     @person = Person.new(person_params)
     @person.owner = current_user
+    authorize @person, :create?
+    
     if @person.save
       flash[:notice] = "Person has been created."
       redirect_to @person
@@ -42,6 +44,7 @@ class PeopleController < ApplicationController
   end
 
   def destroy
+    authorize @person, :destroy?
     @person.destroy
     flash[:notice] = "Person has been deleted."
     redirect_to people_path
