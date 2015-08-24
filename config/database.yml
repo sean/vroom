@@ -22,6 +22,6 @@ test:
 
 production:
   adapter: postgresql
-  database: lighthouse_producton
-  username: lighthouse
-  password: <%= ENV["DB_LIGHTHOUSE_PWD"] %>
+  database: vroom_producton
+  username: vroom
+  password: <%= ENV["DB_VROOM_PWD"] %>

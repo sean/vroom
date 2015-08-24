@@ -16,7 +16,7 @@ RSpec.feature "Users can create new people" do
     expect(page).to have_content "Person has been created."
     person = Person.find_by(name: "John Smith")
     expect(page.current_url).to eq person_url(person)
-    title = "John Smith - People - Lighthouse"
+    title = "John Smith - People - Vroom"
     expect(page).to have_title title
   end
 
