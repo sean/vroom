@@ -29,7 +29,7 @@
       <div class="collapse navbar-collapse" id="collapse">
         <ul class="nav navbar-nav">
           <li class="<%= "active" if current_page?("/") %>">
-            <%= link_to "Home", root_path %>
+            <%= link_to "Home", people_path %>
           </li> 
           <% admins_only do %>
           <li>

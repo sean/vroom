@@ -22,8 +22,6 @@
 
 <ul id="notes">
   <% @person.notes.each do |n| %>
-  <li>#<%= n.id %> -
-    <%= link_to n.details, [@person, n] %>
-  </li>
+  <li><%= link_to n.details, [@person, n] %> (Created <%= n.created_at %>)</li>
   <% end %>
 </ul>
