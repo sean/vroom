@@ -2,7 +2,7 @@ class PeopleController < ApplicationController
   before_action :set_person, only: [:show, :edit, :update, :destroy]
 
   def index
-    @people = current_user.admin? ? Person.all : Person.where(:owner => current_user)
+    @people = current_user.admin? ? Person.order(:name) : Person.owned_by(current_user).order(:name)
   end
 
   def new
