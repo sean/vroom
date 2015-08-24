@@ -7,6 +7,7 @@ class PeopleController < ApplicationController
 
   def new
     @person = Person.new
+    @person.owner = current_user
   end
 
   def create

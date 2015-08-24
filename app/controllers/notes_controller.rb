@@ -4,10 +4,12 @@ class NotesController < ApplicationController
 
   def new
     @note = @person.notes.build
+    authorize @note, :create?
   end
 
   def create
     @note = @person.notes.build(note_params)
+    authorize @note, :create?
     if @note.save
       flash[:notice] = "Note has been created."
       redirect_to [@person, @note]

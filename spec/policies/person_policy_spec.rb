@@ -29,24 +29,28 @@ describe PersonPolicy do
   
     context "for anonymous users" do
       let(:user) { nil }
+      it { should_not permit_action :create }
       it { should_not permit_action :show }
       it { should_not permit_action :update }
     end
 
     context "for owners of the person" do
       let(:user) { owner }
+      it { should permit_action :create }
       it { should permit_action :show }
       it { should permit_action :update }
     end
   
     context "for other users" do
       let(:user) { FactoryGirl.create(:user) }
+      it { should_not permit_action :create }
       it { should_not permit_action :show }
       it { should_not permit_action :update }
     end
   
     context "for administrators" do
       let(:user) { FactoryGirl.create :user, :admin }
+      it { should permit_action :create }
       it { should permit_action :show }
       it { should permit_action :update }
     end
