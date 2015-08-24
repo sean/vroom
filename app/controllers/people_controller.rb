@@ -26,9 +26,11 @@ class PeopleController < ApplicationController
   end
 
   def edit
+    authorize @person, :update?
   end
 
   def update
+    authorize @person, :update?
     if @person.update(person_params)
       flash[:notice] = "Person has been updated."
       redirect_to @person

@@ -37,4 +37,27 @@ describe PersonPolicy do
     end
   end
 
+  permissions :update? do
+    let(:user) { FactoryGirl.create :user }
+    let(:person) { FactoryGirl.create :person, owner: user }
+
+    it "blocks anonymous users" do
+      expect(subject).not_to permit(nil, person)
+    end
+
+    it "allows managers of the project" do
+      expect(subject).to permit(user, person)
+    end
+
+    it "allows administrators" do
+      admin = FactoryGirl.create :user, :admin
+      expect(subject).to permit(admin, person)
+    end
+
+    it "doesn't allow other users access" do
+      other_user = FactoryGirl.create :user
+      expect(subject).not_to permit(other_user, person)
+    end 
+  end
+
 end
